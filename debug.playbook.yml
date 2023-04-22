@@ -1,0 +1,22 @@
+---
+- hosts: localhost 
+  become: yes
+  become_user: wasadmin
+  gather_facts: true
+  vars:
+          - username: wasadmin
+          - home: /software/wlp
+          - files: yes   
+          - directory: directory  
+  tasks: 
+    - name: Print Message
+      debug: 
+        msg: "UserName: {{ username }}, HOME DIR: {{ home }}"
+    - name: Print facts
+      debug:
+        msg: "IPv4 address: {{ ansible_default_ipv4.address }}" 
+    - name: Create file or Directoy
+      file:
+        path: '{{ home }}/kishore.yml'
+        state: touch 
+      when: files
